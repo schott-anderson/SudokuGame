@@ -1,4 +1,5 @@
 package br.org.sudoku.service;
 
-public class EventEnum {
+public enum EventEnum {
+    CLEAR_SPACE
 }

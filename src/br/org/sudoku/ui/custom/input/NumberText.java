@@ -1,15 +1,18 @@
 package br.org.sudoku.ui.custom.input;
 
 import br.org.sudoku.model.Space;
+import br.org.sudoku.service.EventEnum;
+import br.org.sudoku.service.EventListener;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 
+import static br.org.sudoku.service.EventEnum.CLEAR_SPACE;
 import static java.awt.Font.PLAIN;
 
-public class NumberText extends JTextField {
+public class NumberText extends JTextField implements EventListener {
     private final Space space;
     public NumberText(final Space space){
         this.space = space;
@@ -48,5 +51,12 @@ public class NumberText extends JTextField {
                 changeSpace();
             }
         });
+    }
+
+    @Override
+    public void update(EventEnum eventType) {
+        if(eventType.equals(CLEAR_SPACE)&&(this.isEnabled())){
+            this.setText("");
+        }
     }
 }
